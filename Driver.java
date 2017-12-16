@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
  * @author Kirkwood Donavin
  */
 public class Driver {
