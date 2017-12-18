@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author Kirkwood Donavin
  */
 public class Driver {
-        /**
+    /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
