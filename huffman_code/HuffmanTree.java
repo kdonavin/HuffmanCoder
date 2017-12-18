@@ -42,11 +42,17 @@ public class HuffmanTree {
                 }
                 System.out.print("\t");
             }
+
+            //Split
             if(level>0){
                 System.out.print(branch + ">-----");
             }
-            System.out.print("(" + localRoot.getKey() + "=" + localRoot.getWeight()+") \n");
-//            System.out.println(connect.toString());
+
+            if(localRoot.getKey()!='\0'){
+                System.out.print("(" + localRoot.getKey() + ":" + localRoot.getWeight()+") \n");
+            } else{
+                System.out.print("(" + localRoot.getWeight()+") \n");
+            }
             connect.set(level + 1, Boolean.TRUE);
             PrintTreeRec(localRoot.getLeft(), level + 1, connect, "0"); 
             connect.set(level, Boolean.FALSE);
