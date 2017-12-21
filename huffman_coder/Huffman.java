@@ -1,7 +1,7 @@
 /**
  * Author: Kirkwood Donavin
  */
-package huffman_code;
+package huffman_coder;
 import java.util.PriorityQueue;
 import java.util.Map;
 import java.util.HashMap;

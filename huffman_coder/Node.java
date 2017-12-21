@@ -2,7 +2,7 @@
  * Author: Kirkwood Donavin
  */
 
-package huffman_code;
+package huffman_coder;
 
 
 import java.lang.Comparable;
