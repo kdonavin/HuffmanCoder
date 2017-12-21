@@ -1,3 +1,6 @@
 #File Types
 *.class
 *.jar
+
+#Files
+.DS_Store
