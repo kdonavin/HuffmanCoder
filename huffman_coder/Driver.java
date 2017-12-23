@@ -1,7 +1,9 @@
-
 package huffman_coder;
 
-import java.io.File;
+import java.nio.file.Files; //For command line file import
+import java.nio.file.Path;
+import java.nio.file.Paths; //For command line file import
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,12 +22,19 @@ public class Driver {
     //Command-line input
     if (args.length > 0) {
       String filename = args[0];
-      File file = new File(filename);
-      x.readText("This report will be an investigation of the commercial success of underserved states, districts and territories (i.e., AK, AR, DC, DE, HI, IA, ID, KS, KY, LA, ME, MO, MS, MT, ND`, NE, NV, OK, PR, RI, SC, SD, TN, UT, VT, WV, WY). It is meant to extend the underserved-state analysis previously included in TechLink's report on the economic impact of the AF's SBIR program.");
-      x.createHuffmanTree();
-      x.printHuffmanCodes();
-      x.encode();
-      System.out.println(x.getEncode());
+      Path p = Paths.get(filename);
+      try{
+        String text = new String(Files.readAllBytes(p));  
+        System.out.println("Contents (Java 7) : " + text);
+
+      } catch(IOException e){
+        e.printStackTrace();
+      }
+      // x.readText("This report will be an investigation of the commercial success of underserved states, districts and territories (i.e., AK, AR, DC, DE, HI, IA, ID, KS, KY, LA, ME, MO, MS, MT, ND`, NE, NV, OK, PR, RI, SC, SD, TN, UT, VT, WV, WY). It is meant to extend the underserved-state analysis previously included in TechLink's report on the economic impact of the AF's SBIR program.");
+      // x.createHuffmanTree();
+      // x.printHuffmanCodes();
+      // x.encode();
+      // System.out.println(x.getEncode());
     } 
 
     //Interactive demo
