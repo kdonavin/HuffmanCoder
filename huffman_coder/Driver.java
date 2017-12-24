@@ -25,16 +25,13 @@ public class Driver {
       Path p = Paths.get(filename);
       try{
         String text = new String(Files.readAllBytes(p));  
-        System.out.println("Contents (Java 7) : " + text);
-
+        x.readText(text);
+        x.createHuffmanTree();
+        x.encode();
+        System.out.println(x.getEncode());
       } catch(IOException e){
         e.printStackTrace();
       }
-      // x.readText("This report will be an investigation of the commercial success of underserved states, districts and territories (i.e., AK, AR, DC, DE, HI, IA, ID, KS, KY, LA, ME, MO, MS, MT, ND`, NE, NV, OK, PR, RI, SC, SD, TN, UT, VT, WV, WY). It is meant to extend the underserved-state analysis previously included in TechLink's report on the economic impact of the AF's SBIR program.");
-      // x.createHuffmanTree();
-      // x.printHuffmanCodes();
-      // x.encode();
-      // System.out.println(x.getEncode());
     } 
 
     //Interactive demo
@@ -42,15 +39,15 @@ public class Driver {
       x.readText("");
       Scanner user_input = new Scanner( System.in );
       String input = "0";
-      System.out.println("Welcome to the Huffman Coder!\nAn interactive demo");
-      while(input.charAt(0) != '6'){
+      System.out.println("Welcome to the HuffmanCoder!\nAn interactive demo");
+      while(input.charAt(0) != 'q'){
         System.out.print("\nPlease select an option number: \n\t"
           + "1) Read in text \n\t"
           + "2) Show visual Huffman Tree \n\t"
           + "3) Display Huffman Code table \n\t"
           + "4) Encode text \n\t"
           + "5) Decode text \n\t"
-          + "6) Quit\n"
+          + "q) Quit\n"
           + ">> ");
         input = user_input.nextLine();
         if(input.length() == 0){
@@ -93,10 +90,14 @@ public class Driver {
               } else{
                 System.out.println("Error: There is no encoded text to decode.");
               }
-              break;   
-            case '6' | 'q':
-              System.out.println("Exiting Huffman Coder. \n");
               break;
+
+            //Quiting   
+            case 'q':
+              System.out.println("Exiting HuffmanCoder. \n");
+              break;
+
+            //Default
             default: System.out.println("You must select a valid option!");
               break;
           }
