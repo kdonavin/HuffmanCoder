@@ -76,19 +76,25 @@ public class Driver {
               }
               break; 
             case '4': 
-              if(x.huffmanExists()){
+              if(x.huffmanExists() && x.getText() != null){
                 x.encode();
-                System.out.println("\nEncoded Text:\n" + x.getEncode());
+                System.out.println("\nEncoded Text (i.e., Index of true bits):\n" + x.getEncode());
+              } else if(x.huffmanExists() && x.getText() == null){
+                System.out.println("Error: Text has already been encoded.");
               } else{
-                System.out.println("Error: Text must first be entered.");                            
+                System.out.println("Error: Text must be provided to encode.");                            
               }
               break;       
             case '5':
-              if(x.huffmanExists() && x.getEncode()!=null){
-              x.decode();
-                System.out.println("\nDecoded Text:\n" + x.getDecode());
+              if(x.huffmanExists()){
+                try{
+                  x.decode();
+                  System.out.println("\nDecoded Text:\n" + x.getText());
+                } catch(NullPointerException e){
+                  System.out.println("Error: There is no encoded text to decode.");
+                }
               } else{
-                System.out.println("Error: There is no encoded text to decode.");
+                System.out.println("Error: Text must be provided to decode.");
               }
               break;
 

@@ -2,10 +2,11 @@
  * Author: Kirkwood Donavin
  */
 package huffman_coder;
-import java.util.PriorityQueue;
-import java.util.Map;
+import java.util.BitSet;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Queue;
+import java.util.PriorityQueue;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.Queue;
 public class Huffman {
     
     private String text;
-    private String encode;
+    private BitSet encode;
     private String decode;
     private Map<String,Integer> counts;
     private Map<String,String> codes;
@@ -94,6 +95,13 @@ public class Huffman {
                     "\t" + this.codes.get(key));
         }
     }
+
+    /**
+    * Prints out a 1s and 0s String representation of the compressed encode
+    */
+    public void printEncode(){
+        //for(int i = 0, i < this.encode)
+    }
     
     private Map<String,String> createCodeMap(){
         HuffmanTree tree = this.huffmanTree;
@@ -116,11 +124,10 @@ public class Huffman {
         assert this.encode != null;
         assert this.huffmanTree != null;
         StringBuffer d = new StringBuffer();
-        String[] cArr = this.encode.split("");
         Node current = this.huffmanTree.getRoot();
         if(this.huffmanTree.getSize()>1){  //To avoid traversing if tree is just a root
-            for(String single: cArr){
-                if(single.charAt(0) == '0'){
+            for(int i = 0; i < this.encode.length(); i++){
+                if(this.encode.get(i) == false){
                     current = current.getLeft();
                 } else {
                     current = current.getRight();
@@ -133,26 +140,35 @@ public class Huffman {
         } else{
             d.append(String.valueOf(current.getKey()));
         }
-        this.decode = d.toString();
-        return this.decode;
+        this.text = d.toString();
+        this.encode = null; //avoid storing codes and text simultaneously
+        return this.text;
     }
     
     /**
      * This method uses a Huffman code Map to encode each character in this 
      * program's text string into binary. Throws NullPointerException if either 
-     * 
+     * text or codes are null
      * @return encode, the encoded text
      */
-    public String encode(){
+    public BitSet encode() throws NullPointerException {
         if(this.text == null | this.codes == null){
             throw new NullPointerException();
         }
-        StringBuffer e = new StringBuffer();
+        StringBuffer s = new StringBuffer();
         String[] cArr = this.text.split("");
         for(String single: cArr){
-            e.append(this.codes.get(single));
+            s.append(this.codes.get(single));
         }
-        this.encode = e.toString();
+        BitSet b = new BitSet(s.length()); //Compression
+
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == '1'){
+                b.set(i);
+            }
+        }
+        this.encode = b;
+        this.text = null; //avoid storing codes and text simultaneously
         return this.encode;
     }
 
@@ -187,21 +203,16 @@ public class Huffman {
      * Access method for encoded text
      * @return encoded text
      */
-    public String getEncode(){
+    public BitSet getEncode(){
+        if(this.encode == null){
+            throw new NullPointerException();
+        }
         return this.encode;
     }
     
     /**
-     * Access method for decoded text
+     * Access method for text
      * @return decoded text that was originally provided
-     */
-    public String getDecode(){
-        return this.decode;
-    }
-    
-    /**
-     * Access method for
-     * @return 
      */
     public String getText(){
         return this.text;
