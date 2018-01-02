@@ -6,6 +6,6 @@ This program uses a priority queue of character frequency nodes (least have prio
 
 This program was written in Java by Kirkwood Donavin in 2016 for a Data Structures and Algorithms course @ Montana State University. It is merely a demonstration of how to perform Huffman coding, and can not (yet!) actually convert files into compressed binary files. 
 
-##How-To
+## How-To
 
 In order to use this HuffmanCoder application, please build a `.jar` file from compiled (i.e., `.class`) files of the `.java` files in this repository. If you are using `bash` scripting on your machine, you may simply execute the included `make_jar.sh` script to make a `huffman_coder.jar` application.
