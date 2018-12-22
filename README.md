@@ -11,4 +11,4 @@ This program was written in Java by Kirkwood Donavin in 2016 for a Data Structur
 In order to use this HuffmanCoder application, please build a `huffman_coder.jar` file from `*.class` files that will be compiled from the `*.java` files in this repository. If you are using `bash` scripting language on your machine, this may accomplished by executing the included `make_jar.sh` script:
 
 1. Execute the `make_jar.sh` script to make a `huffman_coder.jar` application
-2. Run HuffmanCoder application with `run.sh`. With no arguments, the command-line application. Alternatively provide a text file as a command-line argument to be compressed [currently returned as a String of 1s and 0s]. 
+2. Run HuffmanCoder application with `run.sh`. With no arguments, `run.sh` enters an interactive command-line application that demonstrates Huffman coding. Alternatively, the user may provide a text file as a command-line argument to be compressed [currently returned as a String of 1s and 0s]. 
