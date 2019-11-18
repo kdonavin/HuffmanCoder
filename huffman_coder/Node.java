@@ -8,7 +8,9 @@ package huffman_coder;
 import java.lang.Comparable;
 
 /*
- * 
+ * Node Class: nodes are for binary Huffman tree. They store
+ * the character being encoded, a weight for that character
+ * (based on frequency) and the left and right child nodes.
  */
 public class Node implements Comparable<Node> {
     private char key;
