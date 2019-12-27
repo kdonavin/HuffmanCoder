@@ -6,6 +6,7 @@ public class test {
     	Huffman huff = new Huffman();
 		huff.readText("Hello world!");
 		System.out.println(huff.getText());
+		huff.writeHuffman("test.Object");
 	}
 
 }

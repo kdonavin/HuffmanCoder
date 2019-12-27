@@ -220,14 +220,23 @@ public class Huffman {
     }
     
     /**
-     * Write out huffman object to 'loc'
+     * Write out huffman object to 'file_name'
      */
-    // public void writeHuffman(String loc){
-    //     ObjectOutputStream output = 
-    //         new ObjectOutputStream(new FileOutputStream(loc));
-    //     output.writeObject(this);
-    //     output.close();
-    // } 
+    public void writeHuffman(String file_name){
+        try{
+            FileOutputStream file = new FileOutputStream(file_name);
+            try {
+                ObjectOutputStream output = new ObjectOutputStream(file);
+                output.writeObject(this);
+                output.close();
+            } catch(IOException e){
+                System.out.println(e);
+            }
+        } catch(FileNotFoundException e){
+            System.out.println(e);
+        }
+        
+    } 
    
     /////Private Methods
 
