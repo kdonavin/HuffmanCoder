@@ -1,16 +1,6 @@
-/**
- * Author: Kirkwood Donavin
- */
 package huffman_coder;
-
 import java.util.ArrayList;
 
-
-
-/**
- *
- * @author kirkwooddonavin
- */
 public class HuffmanTree {
     private Node root;
     private int size;

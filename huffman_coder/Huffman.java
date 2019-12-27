@@ -1,7 +1,5 @@
-/**
- * Author: Kirkwood Donavin
- */
 package huffman_coder;
+import java.io.*;// For writing and reading 
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +20,7 @@ public class Huffman {
     private HuffmanTree huffmanTree;
     
     //Constructor
-    Huffman(){
+    public Huffman(){
     }
     
     /**
@@ -103,6 +101,9 @@ public class Huffman {
         //for(int i = 0, i < this.encode)
     }
     
+    /**
+     * Needs explanation. Where and why is this used. Causing unchecked conversion warning
+     */
     private Map<String,String> createCodeMap(){
         HuffmanTree tree = this.huffmanTree;
         Map<String,String> m = new HashMap<>();
@@ -218,6 +219,15 @@ public class Huffman {
         return this.text;
     }
     
+    /**
+     * Write out huffman object to 'loc'
+     */
+    // public void writeHuffman(String loc){
+    //     ObjectOutputStream output = 
+    //         new ObjectOutputStream(new FileOutputStream(loc));
+    //     output.writeObject(this);
+    //     output.close();
+    // } 
    
     /////Private Methods
 

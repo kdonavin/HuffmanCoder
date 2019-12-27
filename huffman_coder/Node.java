@@ -1,10 +1,4 @@
-/**
- * Author: Kirkwood Donavin
- */
-
 package huffman_coder;
-
-
 import java.lang.Comparable;
 
 /*
