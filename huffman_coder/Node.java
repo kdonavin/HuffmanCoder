@@ -1,12 +1,13 @@
 package huffman_coder;
 import java.lang.Comparable;
+import java.io.*;
 
 /*
  * Node Class: nodes are for binary Huffman tree. They store
  * the character being encoded, a weight for that character
  * (based on frequency) and the left and right child nodes.
  */
-public class Node implements Comparable<Node> {
+public class Node implements Serializable, Comparable<Node> {
     private char key;
     private int weight;
     private Node leftChild;

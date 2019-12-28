@@ -1,7 +1,8 @@
 package huffman_coder;
 import java.util.ArrayList;
+import java.io.*;// For writing and reading 
 
-public class HuffmanTree {
+public class HuffmanTree implements Serializable {
     private Node root;
     private int size;
     
@@ -21,8 +22,14 @@ public class HuffmanTree {
     }
     
     /**
-     * Traverses the tree in pre-order
+     * Traverses the tree and prints a graphical
+     * representation of the Huffman Tree.
      * @param localRoot the local subtree root.
+     * @param level the current level of children deep from root
+     * @param connect An array per tree depth level that keeps track 
+     * of whether to draw a line between sibling nodes.
+     * @param branch A '1' or '0' to print indicating the node's 
+     * code branch.
      */
     public void PrintTreeRec(Node localRoot, int level, ArrayList<Boolean> connect, String branch){
         if(localRoot != null){

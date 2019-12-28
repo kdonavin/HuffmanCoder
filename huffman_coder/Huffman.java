@@ -10,7 +10,7 @@ import java.util.PriorityQueue;
  *
  * @author kirkwooddonavin
  */
-public class Huffman {
+public class Huffman implements Serializable { //tells Java meant to be output/input
     
     private String text;
     private BitSet encode;
@@ -18,10 +18,11 @@ public class Huffman {
     private Map<String,Integer> counts;
     private Map<String,String> codes;
     private HuffmanTree huffmanTree;
+    private static final long serialVersionUID = 1L; //Version check for input output
+
     
     //Constructor
-    public Huffman(){
-    }
+    public Huffman(){}
     
     /**
      * @param s - a String of text to be compressed
@@ -205,9 +206,6 @@ public class Huffman {
      * @return encoded text
      */
     public BitSet getEncode(){
-        if(this.encode == null){
-            throw new NullPointerException();
-        }
         return this.encode;
     }
     
@@ -220,22 +218,40 @@ public class Huffman {
     }
     
     /**
-     * Write out huffman object to 'file_name'
+     * Write out huffman object to 'file_name' for saving 
+     * compressed data
+     * @return void
      */
     public void writeHuffman(String file_name){
         try{
-            FileOutputStream file = new FileOutputStream(file_name);
-            try {
-                ObjectOutputStream output = new ObjectOutputStream(file);
-                output.writeObject(this);
-                output.close();
-            } catch(IOException e){
-                System.out.println(e);
-            }
-        } catch(FileNotFoundException e){
-            System.out.println(e);
+            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file_name));
+            output.writeObject(this);
+            output.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }      
+    } 
+
+    /**
+     * Read in a huffman object from 'file_name' and overwrite
+     * current huffman object data
+     * @return void
+     */
+    public void readHuffman(String file_name){
+        try{
+            //Is this how it is used?
+            ObjectInputStream input = new ObjectInputStream(new FileInputStream(file_name));
+            Huffman temp = (Huffman) input.readObject();
+            input.close();
+            // Tedious list of copies
+            this.text = temp.getText();
+            this.encode = temp.getEncode();
+            this.counts = temp.getCounts();
+            this.codes = temp.getHuffmanCodes();
+            this.huffmanTree = temp.getHuffmanTree();
+        } catch(Exception e){
+            e.printStackTrace();
         }
-        
     } 
    
     /////Private Methods
