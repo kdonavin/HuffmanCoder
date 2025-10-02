@@ -265,7 +265,7 @@ public class Huffman implements Serializable { //tells Java meant to be output/i
      * @param code
      * @return 
      */
-    private Map createCodeMapRec(Node n, Map<String,String> m, StringBuffer code) {
+    private Map<String, String> createCodeMapRec(Node n, Map<String,String> m, StringBuffer code) {
         if(n == null){
             throw new NullPointerException();
         }
