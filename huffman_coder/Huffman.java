@@ -1,7 +1,9 @@
 package huffman_coder;
 import java.io.*;// For writing and reading 
+import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.PriorityQueue;
@@ -89,7 +91,11 @@ public class Huffman implements Serializable { //tells Java meant to be output/i
         System.out.println("\t"+"Huffman Codes");
         System.out.println("---------------------------");
         System.out.println("Key"+"\t"+ "Freq." + "\t" + "Code");
-        for(String key: this.codes.keySet()){
+
+        List<String> keys = new ArrayList<>(this.codes.keySet());
+        keys.sort((a, b) -> this.counts.get(b) - this.counts.get(a)); // Descending order
+
+        for(String key: keys){
             System.out.println(key + "\t" + this.counts.get(key) + 
                     "\t" + this.codes.get(key));
         }
