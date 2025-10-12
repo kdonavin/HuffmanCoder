@@ -2,7 +2,7 @@
 
 echo "[HuffmanCoder Installer] Starting installation..."
 #System-specific variables
-HUFFDIR="$(cd "$(dirname "$0")/.." && pwd)"
+HUFFDIR="$(cd "$(dirname "$0")" && pwd)"
 echo "[HuffmanCoder Installer] Project directory set to $HUFFDIR"
 
 #Java Compilation
@@ -17,8 +17,9 @@ echo "[HuffmanCoder Installer] JAR file created: $HUFFDIR/huffman_coder.jar"
 BINDIR="$HOME/.local/bin" #Change this to your preferred bin directory and ensure it is in your PATH
 echo "[HuffmanCoder Installer] Creating shell script wrapper in $BINDIR..."
 mkdir -p "$BINDIR"
+cp "$HUFFDIR/huffman_coder.jar" "$BINDIR/huffman_coder.jar"
 echo '#!/bin/bash
-java -jar /home/deck/HuffmanCoder/huffman_coder.jar "$@"' > "$BINDIR/huffman"
+java -jar huffman_coder.jar "$@"' > "$BINDIR/huffman"
 chmod +x "$BINDIR/huffman"
 echo "[HuffmanCoder Installer] Wrapper script created: $BINDIR/huffman"
 
