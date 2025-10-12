@@ -2,9 +2,11 @@
 
 *An interactive command line program for compressing text with Huffman coding.*
 
-This program uses a priority queue of character frequency nodes (least have priority) to construct a Huffman table and Huffman (binary) tree for encoding and decoding character strings. The Huffman tree places the most infrequent characters at greater depths and vice versa. It then may be traversed to create the Huffman table that is a character-to-binary key. That table may be used to encode the most frequent characters in a string with the fewest bits of binary values. The tree may then be used to decode those Huffman codes by searching the tree based on the binary code value until a character value leaf is located.
+Huffman coding is a method of lossless data compression where common characters are assigned shorter binary codes, while uncommon characters are reserved with longer codes. These binary codes can be used to retrieve the original character by traversing a pre-constructed Huffman binary tree that will end in a leaf node containing the original character. In this way, the text information can be stored using fewer bits, alongside a corresponding binary-tree key to retrieve _all_ the original textual information. 
 
-This program was written in Java by Kirkwood Donavin in 2016 for a Data Structures and Algorithms course @ Montana State University. It is merely a demonstration of how to perform Huffman coding, and can not (yet!) actually convert files into compressed binary files. 
+This program uses a priority queue of character frequency nodes (least have priority) to construct a Huffman table and Huffman (binary) tree for encoding and decoding character strings. The Huffman tree places the most infrequent characters at greater depths and vice versa. It then may be traversed to create a Huffman Table that is a character-to-binary reference. That table may be used to encode the most frequent characters in a string with the fewest bits of binary values. The tree may then be used to decode those Huffman codes by searching the tree based on the binary code value until a character value leaf is located.
+
+This program was created by Kirkwood Donavin starting in 2016 for a Data Structures and Algorithms course @ Montana State University. 
 
 ## How-To
 
