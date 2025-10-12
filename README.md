@@ -10,7 +10,12 @@ This program was created by Kirkwood Donavin starting in 2016 for a Data Structu
 
 ## How-To
 
-In order to use this HuffmanCoder application, please build a `huffman_coder.jar` file from `*.class` files that will be compiled from the `*.java` files in this repository. If you are using `bash` scripting language on your machine, this may accomplished by executing the included `make_jar.sh` script:
+To use the HuffmanCoder application, simply run the included `install.sh` script:
 
-1. Execute the `make_jar.sh` script to make a `huffman_coder.jar` application
-2. Run HuffmanCoder application with `run.sh`. With no arguments, `run.sh` enters an interactive command-line application that demonstrates Huffman coding. Alternatively, the user may provide a text file as a command-line argument to be compressed [currently returned as a String of 1s and 0s]. 
+1. Execute the `install.sh` script to build the `huffman_coder.jar` and create a convenient executable wrapper script called `huffman`.
+2. Ensure the executable (`huffman`) is placed in a directory that is in your system's `PATH` (e.g., `~/.local/bin`). The installer will do this by default if you have `~/.local/bin` in your `PATH`.
+3. Run the HuffmanCoder application from the command line with:
+	```
+	huffman
+	```
+	With no arguments, `huffman` enters an interactive command-line application that demonstrates Huffman coding. Alternatively, you may provide a text file as a command-line argument to be compressed (currently returned as a String of 1s and 0s).
