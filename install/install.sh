@@ -14,8 +14,8 @@ jar cfmv huffman_coder.jar Manifest.txt huffman_coder/*.class #cfmv -> create fi
 echo "[HuffmanCoder Installer] JAR file created: $HUFFDIR/huffman_coder.jar"
 
 #Shell Script Wrapper
-echo "[HuffmanCoder Installer] Creating shell script wrapper in $BINDIR..."
 BINDIR="$HOME/.local/bin" #Change this to your preferred bin directory and ensure it is in your PATH
+echo "[HuffmanCoder Installer] Creating shell script wrapper in $BINDIR..."
 mkdir -p "$BINDIR"
 echo '#!/bin/bash
 java -jar /home/deck/HuffmanCoder/huffman_coder.jar "$@"' > "$BINDIR/huffman"
