@@ -54,10 +54,17 @@ public class Driver {
         } else{
           switch (input.charAt(0)){
             case '1': 
-              System.out.print("Enter the text to be encoded: ");
-              String s = user_input.nextLine();
-              x.readText(s);
-              x.createHuffmanTree();
+              System.out.print("Enter the filename containing the text to be encoded: ");
+              String filename = user_input.nextLine();
+              Path p = Paths.get(filename);
+              try {
+                String text = new String(Files.readAllBytes(p));
+                x.readText(text);
+                x.createHuffmanTree();
+                System.out.println("Text loaded from file: " + filename);
+              } catch(IOException e) {
+                System.out.println("Error reading file: " + filename);
+              }
               break;
             case '2': 
               if(x.huffmanExists()){
