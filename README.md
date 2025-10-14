@@ -1,6 +1,6 @@
 # HuffmanCoder
 
-*An interactive command line program for compressing text with Huffman coding.*
+*An interactive command line program for compressing text with Huffman codes.*
 
 Huffman coding is a method of lossless data compression where common characters are assigned shorter binary codes, while uncommon characters are reserved with longer codes. These binary codes can be used to retrieve the original character by traversing a pre-constructed Huffman binary tree that will end in a leaf node containing the original character. In this way, the text information can be stored using fewer bits, alongside a corresponding binary-tree key to retrieve _all_ the original textual information. 
 
