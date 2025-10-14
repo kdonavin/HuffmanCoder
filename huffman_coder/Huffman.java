@@ -176,7 +176,7 @@ public class Huffman implements Serializable { //tells Java meant to be output/i
             }
         }
         this.encode = b;
-        this.text = null; //avoid storing codes and text simultaneously
+        this.text = null; //avoids storing codes and text simultaneously
         return this.encode;
     }
 
@@ -249,7 +249,7 @@ public class Huffman implements Serializable { //tells Java meant to be output/i
             ObjectInputStream input = new ObjectInputStream(new FileInputStream(file_name));
             Huffman temp = (Huffman) input.readObject();
             input.close();
-            // Tedious list of copies
+            //Tedious list of copies
             this.text = temp.getText();
             this.encode = temp.getEncode();
             this.counts = temp.getCounts();
