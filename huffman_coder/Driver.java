@@ -20,17 +20,33 @@ public class Driver {
     //Command-line input
     if (args.length > 0) {
       String filename = args[0];
-      Path p = Paths.get(filename);
-      try{
-        String text = new String(Files.readAllBytes(p));  
-        x.readText(text);
-        x.createHuffmanTree();
-        x.encode();
-        System.out.println(x.getEncode());
-      } catch(IOException e){
-        e.printStackTrace();
+      if (filename.endsWith(".huf")) {
+        // Decode mode
+        x.readHuffman(filename);
+        try {
+          x.decode();
+          String outFile = filename.substring(0, filename.length() - 4);
+          Files.write(Paths.get(outFile), x.getText().getBytes());
+          System.out.println("Decoded text saved to: " + outFile);
+        } catch (Exception e) {
+          System.out.println("Error decoding Huffman file: " + filename);
+        }
+      } else {
+        // Encode mode
+        Path p = Paths.get(filename);
+        try {
+          String text = new String(Files.readAllBytes(p));  
+          x.readText(text);
+          x.createHuffmanTree();
+          x.encode();
+          String outFile = filename + ".huf";
+          x.writeHuffman(outFile);
+          System.out.println("Huffman object saved to: " + outFile);
+        } catch(IOException e){
+          System.out.println("Error reading or writing file: " + filename);
+        }
       }
-    } 
+    }
 
     //Interactive demo
     else{
@@ -83,7 +99,7 @@ public class Driver {
             case '4': 
               if(x.huffmanExists() && x.getText() != null){
                 x.encode();
-                System.out.println("\nEncoded Text (i.e., Index of true bits):\n" + x.getEncode());
+                System.out.println("\nText has been encoded successfully.");
               } else if(x.huffmanExists() && x.getText() == null){
                 System.out.println("Error: Text has already been encoded.");
               } else{
