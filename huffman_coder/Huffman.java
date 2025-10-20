@@ -93,12 +93,66 @@ public class Huffman implements Serializable { //tells Java meant to be output/i
         System.out.println("Key"+"\t"+ "Freq." + "\t" + "Code");
 
         List<String> keys = new ArrayList<>(this.codes.keySet());
-        keys.sort((a, b) -> this.counts.get(b) - this.counts.get(a)); // Descending order
+        // Sort by frequency descending; if frequencies tie, sort by code string lexicographically
+        keys.sort((a, b) -> {
+            int freqCompare = Integer.compare(this.counts.get(b), this.counts.get(a));
+            if (freqCompare != 0) return freqCompare;
+            String codeA = this.codes.get(a);
+            String codeB = this.codes.get(b);
+            return codeA.compareTo(codeB);
+        });
 
         for(String key: keys){
-            System.out.println(key + "\t" + this.counts.get(key) + 
+            System.out.println(formatKey(key) + "\t" + this.counts.get(key) + 
                     "\t" + this.codes.get(key));
         }
+    }
+
+    /**
+     * Format a key string for printing. For common non-printable characters,
+     * return an escaped representation (e.g. '\\n', '\\t'). For a single
+     * space, return '[space]'. For other non-printable or control characters,
+     * return a Unicode escape like '\\u00XX'. Printable characters are
+     * returned unchanged.
+     */
+    public static String formatKey(String key) {
+        if (key == null) return "null";
+        if (key.equals(" ")) return "[space]";
+        if (key.length() == 1) {
+            char c = key.charAt(0);
+            switch (c) {
+                case '\n': return "\\n";
+                case '\t': return "\\t";
+                case '\r': return "\\r";
+                case '\b': return "\\b";
+                case '\f': return "\\f";
+                default:
+                    if (Character.isISOControl(c) || !Character.isDefined(c) || Character.isWhitespace(c) && c!=' ') {
+                        return String.format("\\u%04X", (int)c);
+                    } else {
+                        return String.valueOf(c);
+                    }
+            }
+        }
+        // For multi-character keys, escape common control characters and
+        // otherwise return as-is.
+        StringBuilder out = new StringBuilder();
+        for (char c : key.toCharArray()) {
+            switch (c) {
+                case '\n': out.append("\\n"); break;
+                case '\t': out.append("\\t"); break;
+                case '\r': out.append("\\r"); break;
+                case '\b': out.append("\\b"); break;
+                case '\f': out.append("\\f"); break;
+                default:
+                    if (Character.isISOControl(c) || !Character.isDefined(c)) {
+                        out.append(String.format("\\u%04X", (int)c));
+                    } else {
+                        out.append(c);
+                    }
+            }
+        }
+        return out.toString();
     }
 
     /**

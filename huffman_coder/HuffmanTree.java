@@ -12,8 +12,8 @@ public class HuffmanTree implements Serializable {
         this.size = calculateSize();
     }
     
-    
     public void PrintTree(){
+        System.out.println("Huffman Tree:");
         ArrayList<Boolean> connect = new ArrayList<Boolean>();
         for(int i = 1; i < 20; i++){ //Max depth of 20
             connect.add(true); 
@@ -46,7 +46,8 @@ public class HuffmanTree implements Serializable {
             }
 
             if(localRoot.getKey()!='\0'){
-                System.out.print("(" + localRoot.getKey() + ":" + localRoot.getWeight()+") \n");
+                String keyStr = Huffman.formatKey(String.valueOf(localRoot.getKey()));
+                System.out.print("(" + keyStr + ":" + localRoot.getWeight()+") \n");
             } else{
                 System.out.print("(" + localRoot.getWeight()+") \n");
             }
