@@ -13,8 +13,42 @@ echo "[HuffmanCoder Installer] Creating JAR file..."
 jar cfmv huffman_coder.jar Manifest.txt huffman_coder/*.class #cfmv -> create file, with manifest, verbose
 echo "[HuffmanCoder Installer] JAR file created: $HUFFDIR/huffman_coder.jar"
 
+# Parse args
+print_usage() {
+	cat <<USAGE
+Usage: $0 [--bindir DIR]
+
+Options:
+	--bindir DIR, -b DIR   Install wrapper and JAR into DIR (default: $HOME/.local/bin)
+	--help                 Show this help message
+USAGE
+}
+
+while [ $# -gt 0 ]; do
+	case "$1" in
+		--bindir|-b)
+			BINDIR="$2"
+			shift 2
+			;;
+		--help)
+			print_usage
+			exit 0
+			;;
+		--*)
+			echo "Unknown option: $1" >&2
+			print_usage
+			exit 1
+			;;
+		*)
+			echo "Unexpected argument: $1" >&2
+			print_usage
+			exit 1
+			;;
+	esac
+done
+
 #Shell Script Wrapper
-BINDIR="$HOME/.local/bin" #Change this to your preferred bin directory and ensure it is in your PATH
+BINDIR="${BINDIR:-$HOME/.local/bin}" #Change this to your preferred bin directory and ensure it is in your PATH
 echo "[HuffmanCoder Installer] Creating shell script wrapper in $BINDIR..."
 mkdir -p "$BINDIR"
 # Move the JAR into the bindir (overwrite if present)
@@ -45,6 +79,35 @@ EOF
 
 chmod +x "$WRAPPER_PATH"
 echo "[HuffmanCoder Installer] Wrapper script created: $WRAPPER_PATH"
+
+# Automated smoke test: run the wrapper with --help (timeout after 5s if available)
+echo "[HuffmanCoder Installer] Running smoke test..."
+SMOKE_CMD=("$WRAPPER_PATH" "--help")
+SMOKE_RC=0
+if command -v timeout >/dev/null 2>&1; then
+	timeout 5s "${SMOKE_CMD[@]}" >/dev/null 2>&1 || SMOKE_RC=$?
+else
+	# fallback: run in background and give it 5s
+	"${SMOKE_CMD[@]}" >/dev/null 2>&1 &
+	_smoke_pid=$!
+	sleep 5
+	if kill -0 "$_smoke_pid" >/dev/null 2>&1; then
+		kill "$_smoke_pid" >/dev/null 2>&1 || true
+		SMOKE_RC=124
+	else
+		wait "$_smoke_pid" || SMOKE_RC=$?
+	fi
+fi
+
+if [ "$SMOKE_RC" -eq 0 ]; then
+	echo "[HuffmanCoder Installer] Smoke test passed. The 'huffman' command should work from your PATH."
+else
+	if [ "$SMOKE_RC" -eq 124 ]; then
+		echo "[HuffmanCoder Installer] Smoke test timed out (the program didn't exit quickly). Please run '$WRAPPER_PATH --help' manually to verify." >&2
+	else
+		echo "[HuffmanCoder Installer] Smoke test failed with exit code $SMOKE_RC. You can run '$WRAPPER_PATH --help' to diagnose." >&2
+	fi
+fi
 
 #Clean up
 echo "[HuffmanCoder Installer] Cleaning up class files..."
