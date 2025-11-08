@@ -23,7 +23,7 @@ To use the HuffmanCoder application, simply run the included `install.sh` script
 	
 With no arguments, `huffman` enters an interactive command-line application to demonstrate Huffman Coding. Files may be read in, encoded, and then a summary printed (limited to 500 characters or bits). 
 
-Within the interactive mode, a binary Huffman tree may be printed to demonstrate how huffman codes may traverse the tree to locate symbols/characters during decoding:
+Within the interactive mode, a binary Huffman tree may be printed to demonstrate how Huffman codes are used to traverse the binary tree in order to locate symbols/characters during decoding:
 
 ![Huffman Tree](img/huffman-tree.png)
 
